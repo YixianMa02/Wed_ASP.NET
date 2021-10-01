@@ -114,7 +114,9 @@
                                     <asp:Label ID="lblPizza" runat="server" Text="Pizza: "></asp:Label>
                                 </td>
                                 <td class="auto-style6">
-                                    <asp:DropDownList ID="cboPizza" runat="server" Width="200px" CssClass="tecboc" AutoPostBack="true" OnSelectedIndexChanged="cboPizza_SelectedIndexChanged"></asp:DropDownList>
+                                    <asp:DropDownList ID="cboPizza" runat="server" Width="200px" CssClass="tecboc" AutoPostBack="true" OnSelectedIndexChanged="cboPizza_SelectedIndexChanged">
+                                        <asp:ListItem>Select a Pizza</asp:ListItem>
+                                    </asp:DropDownList>
                                 </td>
                             </tr>
 

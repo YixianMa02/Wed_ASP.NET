@@ -17,7 +17,6 @@ namespace Wed_ASP.NET
             {
                 lblAddresse.Visible = txtAddresse.Visible = false;
                 //
-                cboPizza.Items.Add(new ListItem("Select a Pizza"));
                 cboPizza.Items.Add(new ListItem("Vegetarian", "10"));
                 cboPizza.Items.Add(new ListItem("Hawaiians", "12"));
                 cboPizza.Items.Add(new ListItem("All Dressed", "8"));
@@ -40,13 +39,7 @@ namespace Wed_ASP.NET
                 //
                 radlstCrust.SelectedIndex = 0;
 
-            } else
-            {
-                if (chkDeliver.Checked)
-                    lblAddresse.Visible = txtAddresse.Visible = true;
-                else
-                    lblAddresse.Visible = txtAddresse.Visible = false;
-            }
+            } 
 
             if (cboPizza.SelectedIndex > 0)
             {
@@ -89,7 +82,9 @@ namespace Wed_ASP.NET
 
         protected void chkDeliver_CheckedChanged(object sender, EventArgs e)
         {
+            lblAddresse.Visible = txtAddresse.Visible = chkDeliver.Checked;
 
+            // lblAddresse.Visible = txtAddresse.Visible = (chkDeliver.Checked) ? true : false;
         }
 
         protected void cboPizza_SelectedIndexChanged(object sender, EventArgs e)
@@ -100,6 +95,25 @@ namespace Wed_ASP.NET
         protected void btnOrderNow_Click(object sender, EventArgs e)
         {
             panOrder.Visible = true;
+
+            litOrder.Text = "Sir/Miss " + txtCustomer.Text + ",<br/>Your order for a " + lstPizzaSize.SelectedItem.Text
+                + "<br/>" + cboPizza.SelectedItem.Text + " Pizza<br/>with toppings of:<br/><ul>";
+
+            foreach (ListItem item in chkToppings.Items)
+            {
+                litOrder.Text += item.Selected ? "<li>" + item.Text + "</li>" : "";
+            }
+
+            litOrder.Text += "</ul>On a " + radlstCrust.SelectedItem.Text + " crust<br/>";
+
+            if (chkDeliver.Checked)
+            {
+                litOrder.Text += "Will be delivey to: " + txtAddresse.Text;
+            } else
+            {
+                litOrder.Text += "Will be ready to pick-up.";
+            }
+
         }
     }
 }
